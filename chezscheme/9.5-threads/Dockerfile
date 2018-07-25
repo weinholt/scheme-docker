@@ -41,4 +41,3 @@ FROM debian:stretch
 COPY --from=build /usr/bin/scheme /usr/bin/
 RUN ln -s /usr/bin/scheme /usr/bin/scheme-script && ln -s /usr/bin/scheme /usr/bin/petite
 COPY --from=build /usr/lib/csv9.5/ /usr/lib/csv9.5/
-ENTRYPOINT ["/usr/bin/scheme"]
