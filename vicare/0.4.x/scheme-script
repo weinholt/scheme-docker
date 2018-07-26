@@ -1,0 +1,4 @@
+#!/bin/sh
+script="$1"
+shift
+exec /usr/local/vicare/bin/vicare --r6rs-script "$script" -- "$@"

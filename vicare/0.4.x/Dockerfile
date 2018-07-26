@@ -1,0 +1,35 @@
+# -*- mode: dockerfile; coding: utf-8 -*-
+FROM debian:stretch AS build
+RUN apt-get update && apt-get -y --no-install-recommends install \
+       ca-certificates \
+       gcc \
+       libc6-dev \
+       libffi-dev \
+       libgmp-dev \
+       make \
+       wget \
+       xz-utils \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -uxe; \
+    expectedSha256="47c6b275ce8abf9fe4e0fd7f1b895e45db85e9ed326b75afdf8c75d1eac73163"; \
+    url="https://bitbucket.org/marcomaggi/vicare-scheme/downloads/vicare-scheme-0.4.1-devel.3.tar.xz"; \
+    wget "$url" -O vs.tar.xz; \
+    echo "${expectedSha256} *vs.tar.xz" | sha256sum -c -; \
+    mkdir vs; \
+    tar -C vs --strip-components 1 -xaf vs.tar.xz; \
+    rm vs.tar.xz
+WORKDIR vs
+RUN set -uxe; \
+    ./configure --prefix=/usr/local/vicare; \
+    make; \
+    make install; \
+    make clean
+
+FROM debian:stretch
+RUN apt-get update && apt-get -y --no-install-recommends install \
+       libffi6 \
+       libgmp10 \
+  && rm -rf /var/lib/apt/lists/*
+COPY --from=build /usr/local/vicare/ /usr/local/vicare/
+COPY scheme-script /usr/bin/
