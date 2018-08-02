@@ -1,0 +1,38 @@
+# -*- mode: dockerfile; coding: utf-8 -*-
+FROM debian:stretch AS build
+RUN apt-get update && apt-get -y --no-install-recommends install \
+       build-essential \
+       ca-certificates \
+       cmake \
+       libffi-dev \
+       libgc-dev \
+       libssl-dev \
+       libz-dev \
+       wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN set -uxe; \
+    expectedSha256="097d479f2c0c9299cd10487a435b186e32077535c128d013a03e2668e090a60e"; \
+    url="https://bitbucket.org/ktakashi/sagittarius-scheme/downloads/sagittarius-0.9.3.tar.gz"; \
+    wget "$url" -O ss.tgz; \
+    echo "${expectedSha256} *ss.tgz" | sha256sum -c -; \
+    mkdir ss; \
+    tar -C ss --strip-components 1 -xaf ss.tgz; \
+    rm ss.tgz
+WORKDIR ss
+RUN set -uxe; \
+    cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/sagittarius; \
+    make; \
+    make install; \
+    make clean
+
+FROM debian:stretch
+RUN apt-get update && apt-get -y --no-install-recommends install \
+       libffi6 \
+       libgc1c2 \
+       libssl1.1 \
+  && rm -rf /var/lib/apt/lists/*
+COPY --from=build /usr/local/sagittarius/ /usr/local/sagittarius/
+COPY scheme-script /usr/bin/
+ENV LD_LIBRARY_PATH "/usr/local/sagittarius/lib:${LD_LIBRARY_PATH}"
+ENV PATH "/usr/local/sagittarius/bin:${PATH}"
