@@ -1,0 +1,10 @@
+#!/bin/bash
+# The IRONSCHEME_LIBRARY_PATH variable is non-standard.
+set -e
+
+IFS=':' read -ra libpaths <<< "$IRONSCHEME_LIBRARY_PATH"
+for libpath in "${libpaths[@]}"; do
+  paths="$paths -I $libpath"
+done
+
+exec mono /usr/local/IronScheme/IronScheme.Console-v4.exe /nologo -- $paths "$@"
