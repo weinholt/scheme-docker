@@ -1,17 +1,19 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM alpine:3.8 AS build
-RUN apk add --no-cache \
+FROM debian:stretch AS build
+RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        curl \
        gcc \
+       libc6-dev \
        libx11-dev \
+       uuid-dev \
        make \
        ncurses-dev \
-       musl-dev
+  && rm -rf /var/lib/apt/lists/*
 
 RUN set -uxe; \
-    expectedSha256="90bddd47bae6bc97d0daacbace9606a955fd32b98ff56c38bbad4d6903e182e5"; \
-    url="https://github.com/cisco/ChezScheme/releases/download/v9.5/csv9.5.tar.gz"; \
+    expectedSha256="7189f839f63e7f0e58277138f5873f91c23eae0706a5bfd7081dab5289268f10"; \
+    url="https://github.com/cisco/ChezScheme/releases/download/v9.5.2/csv9.5.2.tar.gz"; \
     curl -L "$url" -o cs.tgz; \
     echo "${expectedSha256} *cs.tgz" | sha256sum -c -; \
     mkdir cs; \
@@ -20,8 +22,6 @@ RUN set -uxe; \
 WORKDIR cs
 RUN set -uxe; \
     sed -ie 's,expeditor,,' s/*.def; \
-    sed -ie 's,#include <xlocale.h>,,' c/expeditor.c; \
-    sed -ie 's,FMTBUFSIZE 60,FMTBUFSIZE 120,' c/prim5.c; \
     ./configure --workarea=build --threads; \
     make -C build; \
     make -C build clean
@@ -34,10 +34,10 @@ RUN set -uxe; \
     ./configure --workarea=build --threads; \
     make -C build; \
     make install; \
-    rm -rf /usr/lib/csv9.5/examples; \
+    rm -rf /usr/lib/csv9.5.2/examples; \
     scheme --version
 
-FROM alpine:3.8
+FROM debian:stretch
 COPY --from=build /usr/bin/scheme /usr/bin/
 RUN ln -s /usr/bin/scheme /usr/bin/scheme-script && ln -s /usr/bin/scheme /usr/bin/petite
-COPY --from=build /usr/lib/csv9.5/ /usr/lib/csv9.5/
+COPY --from=build /usr/lib/csv9.5.2/ /usr/lib/csv9.5.2/
