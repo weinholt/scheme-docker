@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        curl \
@@ -23,10 +23,10 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 ADD IronScheme-1.0.102-de0d45c.zip .
 RUN unzip IronScheme-1.0.102-de0d45c.zip && mv IronScheme /usr/local
 
-FROM debian:stretch
+FROM debian:buster
 COPY --from=build /usr/local/IronScheme /usr/local/IronScheme/
 RUN apt-get update && apt-get -y --no-install-recommends install \
-       mono-reference-assemblies-4.0 \
+       mono-devel \
        mono-runtime \
   && rm -rf /var/lib/apt/lists/*
 COPY scheme-script /usr/local/bin/
