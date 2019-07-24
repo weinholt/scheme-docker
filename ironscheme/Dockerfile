@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        xz-utils \
   && rm -rf /var/lib/apt/lists/*
 
-ADD https://github.com/leppie/IronScheme/releases/download/1.0.110/IronScheme-1.0.110-6a2cd45.zip IronScheme.zip
+ADD https://github.com/leppie/IronScheme/releases/download/1.0.115/IronScheme-1.0.115-c56e079.zip IronScheme.zip
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
 FROM debian:buster
@@ -16,4 +16,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        mono-devel \
        mono-runtime \
   && rm -rf /var/lib/apt/lists/*
+ENV LANG C.UTF-8
 COPY scheme-script /usr/local/bin/
