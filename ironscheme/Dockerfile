@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        xz-utils \
   && rm -rf /var/lib/apt/lists/*
 
-ADD https://github.com/leppie/IronScheme/releases/download/1.0.120/IronScheme-1.0.120-e8d1612.zip IronScheme.zip
+ADD https://github.com/leppie/IronScheme/releases/download/1.0.121/IronScheme-1.0.121-393d598.zip IronScheme.zip
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
 FROM debian:buster
