@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 RUN set -uxe; \
     expectedSha256="7189f839f63e7f0e58277138f5873f91c23eae0706a5bfd7081dab5289268f10"; \
     url="https://github.com/cisco/ChezScheme/releases/download/v9.5.2/csv9.5.2.tar.gz"; \
-    curl -L "$url" -o cs.tgz; \
+    curl --fail --silent --show-error -L "$url" -o cs.tgz; \
     echo "${expectedSha256} *cs.tgz" | sha256sum -c -; \
     mkdir cs; \
     tar -C cs --strip-components 1 --no-same-owner --no-same-permissions -xzf cs.tgz; \
