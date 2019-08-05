@@ -6,6 +6,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libc6-dev \
        libffi-dev \
        libgmp-dev \
+       file \
        make \
        wget \
        xz-utils \
