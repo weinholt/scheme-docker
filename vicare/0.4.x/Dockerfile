@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        gcc \
@@ -28,7 +28,7 @@ RUN set -uxe; \
     make install; \
     make clean
 
-FROM debian:stretch
+FROM debian:buster-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libffi6 \
        libgmp10 \
