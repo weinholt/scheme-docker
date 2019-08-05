@@ -5,7 +5,7 @@ shift
 export LARCENY_ROOT=/usr/local/lib/larceny
 if head -n1 "$script" | grep -q -e '^#! ' -e '^#!/'; then
   # Remove the shebang.
-  exec /usr/local/lib/larceny/larceny -r6rs -program "$script" -ignore1 -- "$@"
+  exec larceny -r6rs -program "$script" -ignore1 -- "$@"
 else
-  exec /usr/local/lib/larceny/larceny -r6rs -program "$script" -- "$@"
+  exec larceny -r6rs -program "$script" -- "$@"
 fi
