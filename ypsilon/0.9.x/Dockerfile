@@ -23,3 +23,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 COPY --from=build /usr/local/share/ /usr/local/share/
 COPY --from=build /usr/local/bin/ /usr/local/bin/
 COPY scheme-script /usr/local/bin
+RUN ln -s ypsilon /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
