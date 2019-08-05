@@ -11,5 +11,4 @@ RUN ./build.sh
 
 FROM scratch
 COPY --from=build /tmp/build/loko /bin/
-COPY --from=build /tmp/build/scheme-script /bin/
 ENTRYPOINT ["/bin/loko"]
