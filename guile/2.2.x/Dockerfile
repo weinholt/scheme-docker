@@ -5,3 +5,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
   && rm -rf /var/lib/apt/lists/*
 
 COPY scheme-script /usr/local/bin/
+RUN ln -s /usr/bin/guile /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
