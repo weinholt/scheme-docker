@@ -19,4 +19,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libc6-i386 \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/lib/larceny/ /usr/local/lib/larceny/
-COPY scheme-script /usr/bin/
+COPY scheme-banner scheme-script /usr/local/bin/
+RUN ln -s ../lib/larceny/larceny /usr/local/bin/larceny
+CMD ["scheme-banner"]
