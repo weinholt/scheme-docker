@@ -14,5 +14,7 @@ RUN set -uxe; \
 
 FROM debian:stretch
 COPY --from=build /usr/local/ /usr/local/
+COPY scheme-banner /usr/local/bin/
 COPY scheme-r7rs /usr/local/bin/
 RUN ldconfig
+CMD ["scheme-banner"]
