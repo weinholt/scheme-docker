@@ -19,3 +19,4 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 ENV LANG C.UTF-8
 COPY ironscheme /usr/local/bin/
 RUN ln -s ironscheme /usr/local/bin/scheme-script
+CMD ["ironscheme"]
