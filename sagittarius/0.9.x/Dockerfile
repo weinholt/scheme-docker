@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 RUN set -uxe; \
     expectedSha256="097d479f2c0c9299cd10487a435b186e32077535c128d013a03e2668e090a60e"; \
     url="https://bitbucket.org/ktakashi/sagittarius-scheme/downloads/sagittarius-0.9.3.tar.gz"; \
-    wget "$url" -O ss.tgz; \
+    wget --no-verbose "$url" -O ss.tgz; \
     echo "${expectedSha256} *ss.tgz" | sha256sum -c -; \
     mkdir ss; \
     tar -C ss --strip-components 1 -xaf ss.tgz; \
