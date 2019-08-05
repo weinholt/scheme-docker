@@ -1,7 +1,7 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
 
 # XXX: This uses Jessie because newer gcc versions miscompile Mosh
-FROM debian:jessie AS build
+FROM debian:jessie-slim AS build
 
 ADD http://storage.osdev.info/pub/mosh/mosh-current.tar.gz /tmp/mosh-current.tar.gz
 WORKDIR /tmp
@@ -40,7 +40,7 @@ RUN set -uxe; \
     make -j4; \
     make install
 
-FROM debian:jessie
+FROM debian:jessie-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libssl1.0.0 \
        libffi6 \
