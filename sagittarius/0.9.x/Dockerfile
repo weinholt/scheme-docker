@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        build-essential \
        ca-certificates \
@@ -26,7 +26,7 @@ RUN set -uxe; \
     make install; \
     make clean
 
-FROM debian:stretch
+FROM debian:buster-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libffi6 \
        libgc1c2 \
