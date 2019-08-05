@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 script="$1"
 shift
-exec /usr/local/vicare/bin/vicare --r6rs-script "$script" -- "$@"
+exec vicare --r6rs-script "$script" -- "$@"

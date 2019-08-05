@@ -32,4 +32,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libgmp10 \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/vicare/ /usr/local/vicare/
-COPY scheme-script /usr/bin/
+RUN ln -s ../vicare/bin/vicare /usr/local/bin/vicare
+COPY scheme-script /usr/local/bin/
