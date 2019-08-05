@@ -1,4 +1,0 @@
-#!/bin/sh
-script="$1"
-shift
-exec /usr/local/bin/mosh "$script" "$@"
