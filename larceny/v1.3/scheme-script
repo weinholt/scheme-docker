@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 script="$1"
 shift
 export LARCENY_ROOT=/usr/local/lib/larceny
