@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        curl \
@@ -37,7 +37,7 @@ RUN set -uxe; \
     rm -rf /usr/lib/csv9.5.2/examples; \
     scheme --version
 
-FROM debian:stretch
+FROM debian:buster-slim
 COPY --from=build /usr/lib/csv9.5.2/ /usr/lib/csv9.5.2/
 COPY --from=build /usr/bin/scheme /usr/bin/
 RUN ln -s scheme /usr/bin/scheme-script && \
