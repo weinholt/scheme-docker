@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        build-essential \
        wget \
@@ -12,7 +12,7 @@ RUN set -uxe; \
     make; \
     make install
 
-FROM debian:stretch
+FROM debian:buster-slim
 COPY --from=build /usr/local/ /usr/local/
 COPY scheme-banner /usr/local/bin/
 COPY scheme-r7rs /usr/local/bin/
