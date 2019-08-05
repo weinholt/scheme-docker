@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        wget \
@@ -14,7 +14,7 @@ RUN set -uxe; \
     tar -C /usr/local/lib/larceny --strip-components 1 -xzf ls.tgz; \
     rm ls.tgz
 
-FROM debian:stretch
+FROM debian:buster-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libc6-i386 \
   && rm -rf /var/lib/apt/lists/*
