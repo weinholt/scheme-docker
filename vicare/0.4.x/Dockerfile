@@ -34,3 +34,4 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 COPY --from=build /usr/local/vicare/ /usr/local/vicare/
 RUN ln -s ../vicare/bin/vicare /usr/local/bin/vicare
 COPY scheme-script /usr/local/bin/
+CMD ["vicare"]
