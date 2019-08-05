@@ -11,4 +11,6 @@ RUN ./build.sh
 
 FROM debian:buster-slim
 COPY --from=build /tmp/build/loko /usr/local/bin/
+RUN ln -s loko /usr/local/bin/scheme-banner
 RUN ln -s loko /usr/local/bin/scheme-script
+CMD ["scheme-banner"]
