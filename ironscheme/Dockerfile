@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:buster AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        ca-certificates \
        curl \
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 ADD https://github.com/leppie/IronScheme/releases/download/1.0.123/IronScheme-1.0.123-11d458e.zip IronScheme.zip
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
-FROM debian:buster
+FROM debian:buster-slim
 COPY --from=build /usr/local/IronScheme /usr/local/IronScheme/
 RUN apt-get update && apt-get -y --no-install-recommends install \
        mono-devel \
