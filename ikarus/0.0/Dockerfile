@@ -1,5 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
-FROM debian:stretch AS build
+FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
        build-essential \
        bzr \
@@ -15,7 +15,7 @@ RUN set -uxe; \
     make; \
     make install
 
-FROM debian:stretch
+FROM debian:buster-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libffi6 \
        libgmp10 \
