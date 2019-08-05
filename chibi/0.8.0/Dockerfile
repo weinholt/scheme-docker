@@ -14,4 +14,5 @@ RUN set -uxe; \
 
 FROM debian:stretch
 COPY --from=build /usr/local/ /usr/local/
+COPY scheme-r7rs /usr/local/bin/
 RUN ldconfig
