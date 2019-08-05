@@ -22,3 +22,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/lib/ikarus/ /usr/local/lib/ikarus/
 COPY --from=build /usr/local/bin/ /usr/local/bin/
+RUN ln -s ikarus /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
