@@ -14,7 +14,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 RUN set -uxe; \
     expectedSha256="47c6b275ce8abf9fe4e0fd7f1b895e45db85e9ed326b75afdf8c75d1eac73163"; \
     url="https://bitbucket.org/marcomaggi/vicare-scheme/downloads/vicare-scheme-0.4.1-devel.3.tar.xz"; \
-    wget "$url" -O vs.tar.xz; \
+    wget --no-verbose "$url" -O vs.tar.xz; \
     echo "${expectedSha256} *vs.tar.xz" | sha256sum -c -; \
     mkdir vs; \
     tar -C vs --strip-components 1 -xaf vs.tar.xz; \
