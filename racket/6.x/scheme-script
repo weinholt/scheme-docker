@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eu
 script="$1"
 if head -n1 "$script" | grep -q -e '^#! ' -e '^#!/'; then
   # Remove the shebang.
