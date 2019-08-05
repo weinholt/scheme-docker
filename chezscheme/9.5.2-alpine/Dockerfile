@@ -40,6 +40,7 @@ RUN set -uxe; \
 FROM alpine:3.8
 RUN apk add --no-cache \
        libuuid
-COPY --from=build /usr/bin/scheme /usr/bin/
-RUN ln -s /usr/bin/scheme /usr/bin/scheme-script && ln -s /usr/bin/scheme /usr/bin/petite
 COPY --from=build /usr/lib/csv9.5.2/ /usr/lib/csv9.5.2/
+COPY --from=build /usr/bin/scheme /usr/bin/
+RUN ln -s scheme /usr/bin/scheme-script && \
+    ln -s scheme /usr/bin/petite
