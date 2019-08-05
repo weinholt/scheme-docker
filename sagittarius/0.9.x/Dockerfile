@@ -33,6 +33,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libssl1.1 \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/sagittarius/ /usr/local/sagittarius/
-COPY scheme-script /usr/bin/
+COPY scheme-banner scheme-script /usr/local/bin/
 ENV LD_LIBRARY_PATH "/usr/local/sagittarius/lib:${LD_LIBRARY_PATH}"
 ENV PATH "/usr/local/sagittarius/bin:${PATH}"
+CMD scheme-banner
