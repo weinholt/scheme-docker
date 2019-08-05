@@ -33,5 +33,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/vicare/ /usr/local/vicare/
 COPY scheme-script /usr/local/bin/
-CMD ["vicare"]
 RUN ln -s ../vicare/bin/vicare /usr/local/bin/vicare
+RUN ln -s vicare /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
