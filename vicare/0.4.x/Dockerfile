@@ -6,6 +6,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libc6-dev \
        libffi-dev \
        libgmp-dev \
+       libreadline-dev \
        file \
        make \
        wget \
@@ -31,6 +32,7 @@ FROM debian:stretch
 RUN apt-get update && apt-get -y --no-install-recommends install \
        libffi6 \
        libgmp10 \
+       libreadline7 \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/vicare/ /usr/local/vicare/
 COPY scheme-script /usr/local/bin/
