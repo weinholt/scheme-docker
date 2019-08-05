@@ -17,4 +17,5 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        mono-runtime \
   && rm -rf /var/lib/apt/lists/*
 ENV LANG C.UTF-8
-COPY scheme-script /usr/local/bin/
+COPY ironscheme /usr/local/bin/
+RUN ln -s ironscheme /usr/local/bin/scheme-script
