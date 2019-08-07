@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        xz-utils \
   && rm -rf /var/lib/apt/lists/*
 
-ADD https://github.com/leppie/IronScheme/releases/download/1.0.123/IronScheme-1.0.123-11d458e.zip IronScheme.zip
+ADD https://github.com/leppie/IronScheme/releases/download/1.0.125/IronScheme-1.0.125-21ecbfd.zip IronScheme.zip
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
 FROM debian:buster-slim
@@ -18,5 +18,8 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
   && rm -rf /var/lib/apt/lists/*
 ENV LANG C.UTF-8
 COPY ironscheme /usr/local/bin/
-RUN ln -s ironscheme /usr/local/bin/scheme-script
-CMD ["ironscheme"]
+RUN ln -s IronScheme.Console-v4.exe /usr/local/IronScheme/ironscheme && \
+    ln -s ironscheme /usr/local/bin/isc && \
+    ln -s ironscheme /usr/local/bin/scheme-banner && \
+    ln -s ironscheme /usr/local/bin/scheme-script
+CMD ["scheme-banner"]

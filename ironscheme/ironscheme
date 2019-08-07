@@ -3,10 +3,14 @@
 set -eu
 
 pathflags=()
-IFS=':' read -ra paths <<< "${IRONSCHEME_LIBRARY_PATH:-}"
+IFS=':' read -ra paths <<<"${IRONSCHEME_LIBRARY_PATH:-}"
 for path in "${paths[@]}"; do
   pathflags+=(-I "$path")
 done
 
-exec mono /usr/local/IronScheme/IronScheme.Console-v4.exe \
-  /nologo -- "${pathflags[@]}" "$@"
+command=ironscheme
+case $(basename "$0") in
+scheme-banner) command=IronScheme.Console-v4.exe ;;
+esac
+
+exec mono "/usr/local/IronScheme/$command" -- "${pathflags[@]}" "$@"
