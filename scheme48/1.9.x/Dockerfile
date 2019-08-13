@@ -16,5 +16,5 @@ RUN make install
 
 FROM debian:buster-slim
 COPY --from=build /usr/local/ /usr/local/
-RUN ln -s scheme48 /usr/local/bin/banner-scheme
-CMD ["banner-scheme"]
+RUN ln -s scheme48 /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
