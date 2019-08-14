@@ -1,0 +1,15 @@
+# -*- mode: dockerfile; coding: utf-8 -*-
+FROM debian:buster-slim AS build
+RUN apt-get update && apt-get -y --no-install-recommends install \
+        build-essential \
+        && rm -rf /var/lib/apt/lists/*
+ADD https://code.call-cc.org/releases/5.1.0/chicken-5.1.0.tar.gz chicken-5.1.0.tar.gz
+RUN tar -xvf chicken-5.1.0.tar.gz
+WORKDIR chicken-5.1.0
+RUN make PLATFORM=linux
+RUN make PLATFORM=linux install
+
+FROM debian:buster-slim
+COPY --from=build /usr/local/ /usr/local/
+RUN ln -s csi /usr/local/bin/scheme-banner
+CMD ["scheme-banner"]
