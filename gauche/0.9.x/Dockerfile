@@ -12,6 +12,9 @@ RUN apt-get update \
     && apt-get remove -y --purge --auto-remove build-essential \
         libtool pkg-config curl unzip \
     && rm -rf /var/lib/apt/lists/*
+
+FROM debian:buster-slim
+COPY --from=build /usr/local/ /usr/local/
 COPY scheme-banner /usr/local/bin/
 RUN ln -s gosh /usr/bin/scheme-r7rs
 CMD ["scheme-banner"]
