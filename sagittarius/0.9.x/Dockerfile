@@ -26,6 +26,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libssl1.1 \
   && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/ /usr/local/
-COPY scheme-banner scheme-script /usr/local/bin/
+COPY scheme-banner scheme-r7rs scheme-script /usr/local/bin/
 RUN ldconfig
 CMD scheme-banner
