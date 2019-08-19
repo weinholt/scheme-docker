@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/local/sagittarius/bin/sagittarius -r6 "$@"
+exec sagittarius -r 6 "$@"
