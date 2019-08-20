@@ -42,6 +42,37 @@ this at the top of your programs:
 
 This follows [SRFI-22](https://srfi.schemers.org/srfi-22/).
 
+## Script wrapper support
+
+Image        | scheme-script   | script-r7rs
+------------ | --------------- | --------------
+bigloo       |                 |
+chezscheme   | x               |
+chibi        |                 | x
+chicken      |                 |
+cyclone      |                 |
+femtolisp    |                 |
+foment       |                 |
+gambit       |                 |
+gauche       |                 |
+gerbil       |                 |
+guile        | x               |
+ikarus       | x               |
+ironscheme   | x               |
+kawa         |                 |
+larceny      | x               |
+loko         | x               |
+mit-scheme   |                 |
+mosh         | x               |
+racket       | x               |
+s7           |                 |
+sagittarius  | x               | x
+scheme48     |                 |
+scheme9      |                 |
+scsh         |                 |
+vicare       | x               |
+ypsilon      | x               |
+
 ## Implementation notes
 
 ### Chez Scheme
