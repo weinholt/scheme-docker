@@ -8,10 +8,11 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
        libssl-dev \
        libz-dev \
   && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /build
+COPY checksum checksum
 ADD https://bitbucket.org/ktakashi/sagittarius-scheme/downloads/sagittarius-0.9.6.tar.gz \
-  sagittarius.tar.gz
+        sagittarius.tar.gz
+RUN sha256sum sagittarius.tar.gz && sha256sum -c checksum
 RUN mkdir sagittarius \
   && tar -C sagittarius --strip-components 1 -xf sagittarius.tar.gz
 WORKDIR /build/sagittarius
