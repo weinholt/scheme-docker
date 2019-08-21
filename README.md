@@ -44,7 +44,7 @@ This follows [SRFI-22](https://srfi.schemers.org/srfi-22/).
 
 ## Script wrapper support
 
-Image        | scheme-script   | script-r7rs
+Image        | scheme-script   | scheme-r7rs
 ------------ | --------------- | --------------
 bigloo       |                 |
 chezscheme   | x               |
