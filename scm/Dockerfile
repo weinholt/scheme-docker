@@ -4,7 +4,7 @@
 
 FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
-      build-essential texinfo unzip \
+      build-essential install-info texinfo unzip \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
