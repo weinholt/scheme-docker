@@ -1,7 +1,7 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
 FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
-      build-essential \
+      build-essential file \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
