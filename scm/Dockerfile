@@ -14,9 +14,9 @@ RUN sha256sum scm.zip slib.zip && sha256sum -c checksum
 RUN unzip scm.zip
 RUN unzip slib.zip
 WORKDIR /build/slib
-RUN ./configure --prefix=/usr/local/
+RUN ./configure
 WORKDIR /build/scm
-RUN ./configure --prefix=/usr/local/
+RUN ./configure
 RUN make scmlit
 RUN make all
 RUN make install
