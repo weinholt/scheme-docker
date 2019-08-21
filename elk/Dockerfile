@@ -1,6 +1,5 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
 FROM debian:buster-slim AS build
-RUN dpkg --add-architecture i386
 RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential \
  && rm -rf /var/lib/apt/lists/*
