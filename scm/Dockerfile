@@ -15,6 +15,8 @@ RUN unzip scm.zip
 RUN unzip slib.zip
 WORKDIR /build/slib
 RUN ./configure
+RUN make
+RUN make install
 WORKDIR /build/scm
 RUN ./configure
 RUN make scmlit
