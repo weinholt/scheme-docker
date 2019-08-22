@@ -3,7 +3,10 @@ FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
       unzip \
  && rm -rf /var/lib/apt/lists/*
+WORKDIR /build
+COPY checksum checksum
 ADD https://github.com/leppie/IronScheme/releases/download/1.0.130/IronScheme-1.0.130-8683f6d.zip IronScheme.zip
+RUN sha256sum IronScheme.zip && sha256sum -c checksum
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
 FROM debian:buster-slim
