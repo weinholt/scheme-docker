@@ -15,9 +15,8 @@ RUN make test
 
 FROM debian:sid-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
-        libck0 \
-        libtommath1 \
-        && rm -rf /var/lib/apt/lists/*
+      gcc libc-dev libck0 libck-dev libtommath1 libtommath-dev \
+ && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/ /usr/local/
 RUN ln -s icyc /usr/local/bin/scheme-banner
 CMD ["scheme-banner"]
