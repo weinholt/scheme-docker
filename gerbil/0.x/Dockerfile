@@ -27,6 +27,9 @@ WORKDIR /build/gerbil/src
 RUN ./build.sh
 
 FROM debian:buster-slim
+RUN apt-get update && apt-get -y --no-install-recommends install \
+      gcc libc-dev \
+ && rm -rf /var/lib/apt/lists/*
 COPY --from=build /usr/local/ /usr/local/
 COPY --from=build /build/gerbil/bin/ /usr/local/bin/
 COPY --from=build /build/gerbil/lib/ /usr/local/lib/
