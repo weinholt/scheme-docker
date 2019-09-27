@@ -5,13 +5,13 @@
 
 FROM debian:buster-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
-        build-essential \
-        libsqlite3-dev \
-        libssl-dev \
-        openssl \
-        sqlite3 \
-        zlib1g-dev \
-        && rm -rf /var/lib/apt/lists/*
+      build-essential \
+      libsqlite3-dev \
+      libssl-dev \
+      openssl \
+      sqlite3 \
+      zlib1g-dev \
+ && rm -rf /var/lib/apt/lists/*
 
 # Build Gambit
 ADD https://www.iro.umontreal.ca/~gambit/download/gambit/v4.9/source/gambit-v4_9_3.tgz gambit-v4_9_3.tgz
