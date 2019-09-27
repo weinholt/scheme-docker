@@ -12,25 +12,23 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
       sqlite3 \
       zlib1g-dev \
  && rm -rf /var/lib/apt/lists/*
-
-# Build Gambit
-ADD https://www.iro.umontreal.ca/~gambit/download/gambit/v4.9/source/gambit-v4_9_3.tgz gambit-v4_9_3.tgz
-RUN tar -xvf gambit-v4_9_3.tgz
-WORKDIR gambit-v4_9_3
+WORKDIR /build
+COPY checksum checksum
+ADD https://www.iro.umontreal.ca/~gambit/download/gambit/v4.9/source/gambit-v4_9_3.tgz gambit.tgz
+ADD https://github.com/vyzo/gerbil/archive/v0.15.1.tar.gz gerbil.tar.gz
+RUN sha256sum gambit.tgz gerbil.tar.gz && sha256sum -c checksum
+RUN mkdir gambit && tar -C gambit --strip-components 1 -xf gambit.tgz
+RUN mkdir gerbil && tar -C gerbil --strip-components 1 -xf gerbil.tar.gz
+WORKDIR /build/gambit
 RUN ./configure --prefix=/usr/local --enable-single-host
 RUN make
 RUN make install
-
-# Build Gerbil (requires Gambit)
-WORKDIR /root
-ADD https://github.com/vyzo/gerbil/archive/v0.15.1.tar.gz gerbil-0.15.1.tar.gz
-RUN tar -xvf gerbil-0.15.1.tar.gz && mv gerbil-0.15.1 gerbil
-WORKDIR gerbil/src
+WORKDIR /build/gerbil/src
 RUN ./build.sh
 
 FROM debian:buster-slim
 COPY --from=build /usr/local/ /usr/local/
-COPY --from=build /root/gerbil/bin/ /usr/local/bin/
-COPY --from=build /root/gerbil/lib/ /usr/local/lib/
+COPY --from=build /build/gerbil/bin/ /usr/local/bin/
+COPY --from=build /build/gerbil/lib/ /usr/local/lib/
 RUN ln -s gxi /usr/local/bin/scheme-banner
 CMD ["scheme-banner"]
