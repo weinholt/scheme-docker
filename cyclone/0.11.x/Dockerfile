@@ -1,12 +1,13 @@
 # -*- mode: dockerfile; coding: utf-8 -*-
+
 # Need to use Debian sid because libck is not available in buster.
+
 FROM debian:sid-slim AS build
 RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential \
       libck-dev \
       libtommath-dev \
  && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /build
 COPY checksum checksum
 ADD https://github.com/justinethier/cyclone-bootstrap/archive/v0.11.4.tar.gz cyclone-bootstrap.tar.gz
