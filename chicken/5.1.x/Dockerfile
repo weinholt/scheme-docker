@@ -11,6 +11,7 @@ RUN mkdir chicken && tar -C chicken --strip-components 1 -xf chicken.tar.gz
 WORKDIR /build/chicken
 RUN make PLATFORM=linux
 RUN make PLATFORM=linux install
+RUN chicken-install r7rs
 
 FROM debian:buster-slim
 RUN apt-get update && apt-get -y --no-install-recommends install \
