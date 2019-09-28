@@ -8,9 +8,9 @@ RUN tar --strip-components 1 -xvzf loko.tar.gz
 RUN akku --debug install
 RUN apk add make
 RUN make
+RUN make install && rm /usr/local/bin/scheme-banner
 
 FROM debian:buster-slim
-COPY --from=build /tmp/build/loko /usr/local/bin/
-RUN ln -s loko /usr/local/bin/scheme-banner
-RUN ln -s loko /usr/local/bin/scheme-script
+COPY --from=build /usr/local /usr/local
+RUN ln -s loko /usr/local/bin/scheme-banner && ln -s loko /usr/local/bin/scheme-script
 CMD ["scheme-banner"]

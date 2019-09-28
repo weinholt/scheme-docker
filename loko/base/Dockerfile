@@ -8,7 +8,8 @@ RUN tar --strip-components 1 -xvzf loko.tar.gz
 RUN akku --debug install
 RUN apk add make
 RUN make
+RUN make install && rm /usr/local/bin/scheme-banner
 
 FROM scratch
-COPY --from=build /tmp/build/loko /bin/
-ENTRYPOINT ["/bin/loko"]
+COPY --from=build /usr/local /usr/local
+ENTRYPOINT ["/usr/local/bin/loko"]
