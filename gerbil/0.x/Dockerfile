@@ -33,5 +33,6 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 COPY --from=build /usr/local/ /usr/local/
 COPY --from=build /build/gerbil/bin/ /usr/local/bin/
 COPY --from=build /build/gerbil/lib/ /usr/local/lib/
+ENV GERBIL_HOME=/usr/local
 RUN ln -s gxi /usr/local/bin/scheme-banner
 CMD ["scheme-banner"]
