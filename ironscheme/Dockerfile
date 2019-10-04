@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
-ADD https://github.com/leppie/IronScheme/releases/download/1.0.188/IronScheme-1.0.188-a4a79d5.zip IronScheme.zip
+ADD https://github.com/leppie/IronScheme/releases/download/1.0.191/IronScheme-1.0.191-56feaab.zip IronScheme.zip
 RUN sha256sum IronScheme.zip && sha256sum -c checksum
 RUN unzip IronScheme.zip && mv IronScheme /usr/local
 
