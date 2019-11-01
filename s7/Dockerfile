@@ -10,7 +10,7 @@ RUN sha256sum s7.tar.gz && sha256sum -c checksum
 RUN tar -xf s7.tar.gz
 WORKDIR /build/s7
 RUN touch mus-config.h
-RUN gcc s7.c -o repl -DWITH_MAIN -I. -O2 -g -ldl -lm -Wl,-export-dynamic
+RUN gcc s7.c -o repl -DWITH_MAIN -I. -O2 -g -ldl -lm -rdynamic
 
 # Initial run to generate libc_s7.c and compile libc_s7.so using gcc.
 RUN ./repl </dev/null
