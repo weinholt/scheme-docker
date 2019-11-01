@@ -11,9 +11,7 @@ RUN tar -xf s7.tar.gz
 WORKDIR /build/s7
 RUN touch mus-config.h
 RUN gcc s7.c -o s7 -DWITH_MAIN -I. -O2 -g -ldl -lm -rdynamic
-
-# Initial run to generate libc_s7.c and compile libc_s7.so using gcc.
-RUN ./s7 </dev/null
+RUN ./s7 libc.scm
 
 FROM debian:buster-slim
 COPY --from=build /build/s7/ /usr/local/s7/
