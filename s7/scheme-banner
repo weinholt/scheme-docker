@@ -1,5 +1,4 @@
 #!/bin/sh
 set -eu
 cd /usr/local/s7
-cat checksum # Can we get a real version number somehow?
 exec ./repl "$@"
