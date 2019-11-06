@@ -9,12 +9,12 @@ ADD https://ccrma.stanford.edu/software/s7/s7.tar.gz s7.tar.gz
 RUN sha256sum s7.tar.gz && sha256sum -c checksum
 RUN tar -xf s7.tar.gz
 WORKDIR /build/s7
-RUN echo '#define S7_LOAD_PATH "/usr/local/s7"' >mus-config.h
+RUN echo '#define S7_LOAD_PATH "/usr/local/lib/s7"' >mus-config.h
 RUN sed -i 's@#if S7_LOAD_PATH@#ifdef S7_LOAD_PATH@' s7.c
 RUN gcc -o s7 s7.c -ldl -lm -rdynamic -O2 -g -I . -D WITH_MAIN
 RUN ./s7 libc.scm
-RUN find . -name '*.scm' | rsync -va --files-from - ./ /usr/local/s7/ \
- && cp -v libc_s7.so /usr/local/s7/ \
+RUN find . -name '*.scm' | rsync -va --files-from - ./ /usr/local/lib/s7/ \
+ && cp -v libc_s7.so /usr/local/lib/s7/ \
  && cp -v s7 /usr/local/bin/
 
 FROM debian:buster-slim
