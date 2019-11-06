@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eu
-cd /usr/local/s7
-exec ./s7 "$@"
