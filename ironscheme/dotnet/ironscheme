@@ -1,0 +1,16 @@
+#!/bin/bash
+# The IRONSCHEME_LIBRARY_PATH variable is non-standard.
+set -eu
+
+pathflags=()
+IFS=':' read -ra paths <<<"${IRONSCHEME_LIBRARY_PATH:-}"
+for path in "${paths[@]}"; do
+  pathflags+=(-I "$path")
+done
+
+command=ironscheme
+case $(basename "$0") in
+scheme-banner) command=IronScheme.ConsoleCore.dll ;;
+esac
+
+exec dotnet "/usr/local/IronScheme/$command" -- "${pathflags[@]}" "$@"
