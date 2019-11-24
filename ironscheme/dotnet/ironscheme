@@ -8,9 +8,10 @@ for path in "${paths[@]}"; do
   pathflags+=(-I "$path")
 done
 
-command=ironscheme
 case $(basename "$0") in
-scheme-banner) command=IronScheme.ConsoleCore.dll ;;
+    scheme-banner)
+        exec dotnet "/usr/local/IronScheme/IronScheme.ConsoleCore.dll" -- "${pathflags[@]}" "$@"
+        ;;
+    *)
+        exec dotnet "/usr/local/IronScheme/IronScheme.ConsoleCore.dll" /nologo -- "${pathflags[@]}" "$@"
 esac
-
-exec dotnet "/usr/local/IronScheme/$command" -- "${pathflags[@]}" "$@"
