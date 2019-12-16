@@ -2,4 +2,4 @@
 set -eu
 script="$1"
 shift
-exec /usr/local/bin/ypsilon -6 "$script" -- "$@"
+exec /usr/local/bin/ypsilon -6 -- "$script" "$@"
