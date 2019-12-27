@@ -1,16 +1,14 @@
 #!/bin/bash
 # The IRONSCHEME_LIBRARY_PATH variable is non-standard.
 set -eu
-
-pathflags=()
-IFS=':' read -ra paths <<<"${IRONSCHEME_LIBRARY_PATH:-}"
-for path in "${paths[@]}"; do
-  pathflags+=(-I "$path")
-done
-
-command=ironscheme
+runtime=mono
+exe=ironscheme
+flags=()
 case $(basename "$0") in
-scheme-banner) command=IronScheme.Console-v4.exe ;;
+scheme-banner) exe=IronScheme.Console-v4.exe ;;
+*) flags+=(/nologo) ;;
 esac
-
-exec mono "/usr/local/IronScheme/$command" -- "${pathflags[@]}" "$@"
+flags+=(--)
+IFS=':' read -ra paths <<<"${IRONSCHEME_LIBRARY_PATH:-}"
+for path in "${paths[@]}"; do flags+=(-I "$path"); done
+exec "$runtime" "/usr/local/IronScheme/$exe" "${flags[@]}" "$@"
