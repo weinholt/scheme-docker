@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 WORKDIR /build
 COPY checksum checksum
 RUN curl --fail --silent --show-error -o bigloo.tar.gz \
-      ftp://ftp-sop.inria.fr/indes/fp/Bigloo/bigloo4.3f.tar.gz
+      ftp://ftp-sop.inria.fr/indes/fp/Bigloo/bigloo4.3g.tar.gz
 RUN sha256sum bigloo.tar.gz && sha256sum -c checksum
 RUN mkdir bigloo && tar -C bigloo --strip-components 1 -xf bigloo.tar.gz
 WORKDIR bigloo
