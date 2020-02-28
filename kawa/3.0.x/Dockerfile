@@ -5,9 +5,12 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
       build-essential \
       default-jdk-headless \
  && rm -rf /var/lib/apt/lists/*
-ADD https://ftp.gnu.org/pub/gnu/kawa/kawa-3.0.tar.gz kawa-3.0.tar.gz
-RUN tar -xvf kawa-3.0.tar.gz
-WORKDIR kawa-3.0
+WORKDIR /build
+COPY checksum checksum
+ADD https://ftp.gnu.org/pub/gnu/kawa/kawa-3.0.tar.gz kawa.tar.gz
+RUN sha256sum kawa.tar.gz && sha256sum -c checksum
+RUN mkdir kawa && tar -C kawa --strip-components 1 -xf kawa.tar.gz
+WORKDIR kawa
 RUN ./configure
 RUN make
 RUN make install
