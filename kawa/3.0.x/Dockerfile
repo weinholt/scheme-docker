@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
-ADD https://ftp.gnu.org/pub/gnu/kawa/kawa-3.0.tar.gz kawa.tar.gz
+ADD https://ftp.gnu.org/pub/gnu/kawa/kawa-3.1.1.tar.gz kawa.tar.gz
 RUN sha256sum kawa.tar.gz && sha256sum -c checksum
 RUN mkdir kawa && tar -C kawa --strip-components 1 -xf kawa.tar.gz
 WORKDIR kawa
