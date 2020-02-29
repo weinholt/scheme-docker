@@ -5,7 +5,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /build
 COPY checksum checksum
-ADD https://code.call-cc.org/releases/5.1.0/chicken-5.1.0.tar.gz chicken.tar.gz
+ADD https://code.call-cc.org/releases/5.2.0/chicken-5.2.0.tar.gz chicken.tar.gz
 RUN sha256sum chicken.tar.gz && sha256sum -c checksum
 RUN mkdir chicken && tar -C chicken --strip-components 1 -xf chicken.tar.gz
 WORKDIR /build/chicken
