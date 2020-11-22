@@ -2,7 +2,7 @@
 FROM alpine:3.8 AS build
 WORKDIR /tmp/build
 COPY checksum checksum
-ADD https://scheme.fail/releases/loko-0.6.0.tar.gz loko.tar.gz
+ADD https://scheme.fail/releases/loko-0.7.0.tar.gz loko.tar.gz
 RUN sha256sum loko.tar.gz && sha256sum -c checksum
 RUN tar --strip-components 1 -xvzf loko.tar.gz
 RUN apk add make
